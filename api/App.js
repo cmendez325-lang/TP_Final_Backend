@@ -3,7 +3,7 @@ import cors from 'cors';
 import productoRouter from './routers/productoRouter.js';
 import userRouter from './routers/userRouter.js';
 import carritoRouter from './routers/carritoRouter.js';
-import authRouter from './routers/authRouter.js'; // <-- ¡Nuevo!
+import authRouter from './routers/authRouter.js'; 
 
 const app = express();
 
