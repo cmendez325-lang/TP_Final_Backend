@@ -15,6 +15,6 @@ app.use(express.json());
 app.use('/api/productos', productoRouter);
 app.use('/api/users', userRouter);
 app.use('/api/carrito', carritoRouter);
-app.use('/api/auth', authRouter); // <-- ¡Nuevo!
+app.use('/api/auth', authRouter); 
 
 export default app;
