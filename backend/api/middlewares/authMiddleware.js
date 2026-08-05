@@ -1,6 +1,6 @@
-// authMiddleware.js
 import jwt from 'jsonwebtoken';
 import User from '../Models/User.js';
+
 
 // Verifica el token JWT y busca el usuario real en la DB
 export const estaAutenticado = async (req, res, next) => {
@@ -20,7 +20,10 @@ export const estaAutenticado = async (req, res, next) => {
             return res.status(401).json({ error: "No autorizado. Usuario no encontrado." });
         }
 
-        req.usuario = { id: usuario._id, rol: usuario.rol };
+        // Importante: convertimos el _id a string. Si queda como ObjectId,
+        // las comparaciones tipo "producto.vendedorId.toString() === req.usuario.id"
+        // fallan siempre (comparan string contra objeto), bloqueando al dueño real.
+        req.usuario = { id: usuario._id.toString(), rol: usuario.rol };
         next();
 
     } catch (error) {

@@ -24,9 +24,18 @@ const productoSchema = new mongoose.Schema({
     type: String, 
     required: [true, 'La categoría es obligatoria'],
     trim: true
+  },
+  imagen: {
+    type: String,
+    required: false
+  },
+  vendedorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: false
   }
 }, {
   timestamps: true
 });
 
-export default mongoose.model('Producto', productoSchema);
+export default mongoose.models.Producto || mongoose.model('Producto', productoSchema);

@@ -4,7 +4,7 @@ import {
   obtenerCarrito, 
   agregarOActualizarCarrito, 
   vaciarCarrito 
-} from '../controlers/carritoController.js'; 
+} from '../controllers/carritoController.js'; 
 
 const router = express.Router();
 

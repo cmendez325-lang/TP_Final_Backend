@@ -1,6 +1,7 @@
 // User.js
 import mongoose from 'mongoose';
 
+
 const userSchema = new mongoose.Schema({
     nombre: { 
         type: String, 
