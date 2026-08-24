@@ -100,3 +100,27 @@ export async function remove(req, res) {
         res.status(500).json({ mensaje: "Error al eliminar el producto", error: error.message });
     }
 }
+export const actualizarStock = async (req, res) => {
+    try {
+        const { itemsCarrito } = req.body;
+
+        if (!itemsCarrito || !Array.isArray(itemsCarrito)) {
+            return res.status(400).json({ error: 'No se enviaron los ítems del carrito' });
+        }
+
+        for (const item of itemsCarrito) {
+            const productoId = item._id || item.id;
+            const cantidadComprada = item.cantidad || 1;
+
+            // Resta la cantidad comprada al stock actual en MongoDB
+            await Producto.findByIdAndUpdate(productoId, {
+                $inc: { stock: -cantidadComprada }
+            });
+        }
+
+        res.status(200).json({ mensaje: 'Stock actualizado con éxito en la base de datos' });
+    } catch (error) {
+        console.error('Error al actualizar el stock:', error);
+        res.status(500).json({ error: 'Error interno al procesar el stock' });
+    }
+};
