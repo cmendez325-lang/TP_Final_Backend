@@ -3,6 +3,7 @@ import getAllProducts from "../Services/Productos/getAllProducts.js";
 import getOneProduct from "../Services/Productos/getOneProduct.js";
 import updateProduct from "../Services/Productos/updateProduct.js";
 import deleteProduct from "../Services/Productos/deleteProduct.js";
+import Producto from '../Models/Producto.js';
 
 // GET: Listar todos los productos
 export async function getProducts(req, res) {
