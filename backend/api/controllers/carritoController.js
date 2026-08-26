@@ -28,8 +28,9 @@ export const agregarOActualizarCarrito = async (req, res, next) => {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
+    // Validación general de stock inicial
     if (producto.stock < cantidad) {
-      return res.status(400).json({ error: "Stock insuficiente para la cantidad solicitada" });
+      return res.status(400).json({ error: `Stock insuficiente. Solo hay ${producto.stock} unidades disponibles.` });
     }
 
     let carrito = await Carrito.findOne({ usuarioId });
@@ -43,6 +44,10 @@ export const agregarOActualizarCarrito = async (req, res, next) => {
       const index = carrito.productos.findIndex(p => p.productoId.toString() === productoId);
       
       if (index > -1) {
+        
+        if (producto.stock < cantidad) {
+          return res.status(400).json({ error: `Stock insuficiente. Solo hay ${producto.stock} unidades disponibles.` });
+        }
         carrito.productos[index].cantidad = cantidad;
       } else {
         carrito.productos.push({ productoId, cantidad });
