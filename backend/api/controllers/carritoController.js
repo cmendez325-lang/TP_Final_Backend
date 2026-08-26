@@ -17,7 +17,7 @@ export const obtenerCarrito = async (req, res, next) => {
   }
 };
 
-// Controlador para agregar o actualizar un producto en el carrito
+
 export const agregarOActualizarCarrito = async (req, res, next) => {
   try {
     const { productoId, cantidad } = req.body;
@@ -28,7 +28,7 @@ export const agregarOActualizarCarrito = async (req, res, next) => {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
-    // Validación general de stock inicial
+    
     if (producto.stock < cantidad) {
       return res.status(400).json({ error: `Stock insuficiente. Solo hay ${producto.stock} unidades disponibles.` });
     }
